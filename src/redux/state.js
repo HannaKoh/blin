@@ -11,7 +11,8 @@ let state = {
             {id: 1, name: 'Yulia', src: 'https://wl-adme.cf.tsp.li/resize/728x/jpg/214/dda/5fae555a5a94a24fd073a9a423.jpg'},
             {id: 2, name: 'Alex', src: 'https://screenfiction.org/content/image/0/5/184/924b45fd-full.webp'},
             {id:3, name: 'Kira', src: 'https://vokrug.tv/pic/news/4/4/c/3/44c38d9dcf7a066c791136b5e66e4c30.jpg'}
-        ]
+        ],
+        newPostText: 'Введите сообщение'
         
     },
     dialogsPage: {
@@ -30,14 +31,31 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) =>{
+window.state = state;
+
+export let addPost = () =>{
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         like_count: 0,
         src: 'https://pumpmuscles.ru/wp-content/uploads/2019/03/kak-stat-fitonyashkoi-696x435.jpg'
     }
     state.profilePage.posts.push (newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntirTree (state);
+}
+
+export let addDialog = (messagesDialog) =>{
+    let newMessage = {
+        id: 4,
+        message: messagesDialog
+    }
+    state.dialogsPage.messages.push (newMessage);
+    rerenderEntirTree (state);
+}
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
     rerenderEntirTree (state);
 }
 
