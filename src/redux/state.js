@@ -27,7 +27,8 @@ let state = {
             { id: 3, name: 'Andrey' },
             { id: 4, name: 'Anastaysha' },
             { id: 5, name: 'Alex' }
-        ]
+        ],
+        newMessageText: 'Cообщение...'
     }
 }
 
@@ -45,17 +46,23 @@ export let addPost = () =>{
     rerenderEntirTree (state);
 }
 
-export let addDialog = (messagesDialog) =>{
+export let addDialog = () =>{
     let newMessage = {
         id: 4,
-        message: messagesDialog
+        message: state.dialogsPage.newMessageText
     }
     state.dialogsPage.messages.push (newMessage);
+    state.dialogsPage.newMessageText = '';
     rerenderEntirTree (state);
 }
 
 export let updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
+    rerenderEntirTree (state);
+}
+
+export let updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
     rerenderEntirTree (state);
 }
 
