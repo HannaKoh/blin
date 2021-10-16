@@ -12,9 +12,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
   ReactDOM.render(
     <BrowserRouter>
     <React.StrictMode>
-      <App state={state} addPost= {store.addPost.bind(store)} addDialog= {store.addDialog.bind(store)} 
-      updateNewPostText={store.updateNewPostText.bind(store)} 
-      updateNewMessageText={store.updateNewMessageText.bind(store)}/>
+      <App state={state} dispatch= {store.dispatch.bind(store)}/>
     </React.StrictMode>,
     </BrowserRouter>,
     document.getElementById('root')
