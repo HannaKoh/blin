@@ -1,10 +1,16 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_DIALOG = 'ADD-DIALOG';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
+
 let store = {
     _state: {
         profilePage: {
             posts: [
                 { id: 1, message: 'Hey, girls! The good day!', like_count: 3, src: 'https://superbody.pro/user_files/11/avatar/171e984f4e.jpg' },
                 { id: 2, message: 'Upyyyyyyy... Puppy....Cats', like_count: 5, src: 'https://i.pinimg.com/236x/44/9e/f5/449ef5be2ec36d7dd3b6f03fb3734780.jpg'},
-                { id: 3, message: 'x-ray in medcine rules', like_count: 12, src: 'https://pic.sport.ua/images/news/0/12/155/orig_511003.jpg'  }
+                { id: 3, message: 'x-ray in medcine rules', like_count: 12, src: 'https://pic.sport.ua/images/news/0/12/155/orig_511003.jpg'}
             ],
             friends: [
                 {id: 1, name: 'Yulia', src: 'https://wl-adme.cf.tsp.li/resize/728x/jpg/214/dda/5fae555a5a94a24fd073a9a423.jpg'},
@@ -51,11 +57,11 @@ let store = {
         this._callSubscriber (this._state);
     },
     _addDialog () {
-        let newMessage = {
+        let body = {
             id: 4,
             message: this._state.dialogsPage.newMessageText
         }
-        this._state.dialogsPage.messages.push (newMessage);
+        this._state.dialogsPage.messages.push (body);
         this._state.dialogsPage.newMessageText = '';
         this._callSubscriber (this._state);
     },
@@ -63,23 +69,31 @@ let store = {
         this._state.profilePage.newPostText = newText;
         this._callSubscriber (this._state);
     },
-    _updateNewMessageText (newText) {
-        this._state.dialogsPage.newMessageText = newText;
+    _updateNewMessageText (body) {
+        this._state.dialogsPage.newMessageText = body;
         this._callSubscriber (this._state);
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._addPost ();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._updateNewPostText(action.newText);
-        } else if (action.type === 'ADD-DIALOG'){
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._updateNewPostText(action.body);
+        } else if (action.type === ADD_DIALOG){
             this._addDialog ();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._updateNewMessageText (action.newText);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._updateNewMessageText (action.body);
         }
     }
    
 }
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text) => ({
+        type: UPDATE_NEW_POST_TEXT, newText: text})
+
+export const addDialogActionCreator = () => ({type: ADD_DIALOG})
+export const updateNewMessageTextActionCreator = (body) => ({
+        type: UPDATE_NEW_MESSAGE_TEXT, body: body})
+
 
 export default store;
 window.store = store;
