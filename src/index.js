@@ -7,7 +7,6 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-
  let rerenderEntirTree = (state) => {
   ReactDOM.render(
     <BrowserRouter>
@@ -24,7 +23,6 @@ store.subscribe (()=>{
     let state = store.getState();
     rerenderEntirTree(state); }
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
